@@ -680,3 +680,8 @@ td.gutter {
 #social-share-section {
   margin-bottom: 30px;
 }
+
+/* To center images */
+.center {
+    text-align: center;
+}
