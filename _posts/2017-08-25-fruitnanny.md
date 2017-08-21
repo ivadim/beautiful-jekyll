@@ -4,7 +4,7 @@ title: "FruitNanny"
 subtitle: "RaspberryPI based Baby Monitor"
 tags: [raspberry-pi]
 comments : true
-bigimg: /img/fn2.png
+bigimg: /img/fruitnanny/fn2.png
 ---
 
 * TOC will be output here
