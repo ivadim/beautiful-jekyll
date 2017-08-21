@@ -85,7 +85,7 @@ share-links-active:
 
 # --- Misc --- #
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-disqus: "https-ivadim-github-io"
+disqus: "dmitrys-blog"
 
 # Fill in your Google Analytics ID to track your website using GA
 google_analytics: "UA-99221931-1"
