@@ -249,15 +249,22 @@ Janus listens both 5002 and 5004 ports for incoming streams.
 #### Installation
 
 ```bash
-# get sources
-git clone https://github.com/meetecho/janus-gateway /tmp/janus-gateway
-cd /tmp/janus-gateway
-git checkout v0.2.4
-
 # install prerequisites
 sudo apt-get install libmicrohttpd-dev libjansson-dev libnice-dev \
     libssl-dev libsrtp-dev libsofia-sip-ua-dev libglib2.0-dev \
     libopus-dev libogg-dev pkg-config gengetopt
+    
+# install libsrtp
+wget https://github.com/cisco/libsrtp/archive/v1.5.4.tar.gz
+tar xfv v1.5.4.tar.gz
+cd libsrtp-1.5.4
+./configure --prefix=/usr --enable-openssl
+make ; sudo make install
+
+# get Janus sources
+git clone https://github.com/meetecho/janus-gateway /tmp/janus-gateway
+cd /tmp/janus-gateway
+git checkout v0.2.5
 
 # build binaries
 sh autogen.sh
