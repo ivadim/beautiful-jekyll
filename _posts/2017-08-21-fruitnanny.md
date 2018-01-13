@@ -343,8 +343,8 @@ Install nodejs process manager (PM2) for automatic nodejs app startup:
 
 ```
 sudo npm install pm2 -g
-pm2 startup
-sudo su -c "env PATH=$PATH:/usr/bin pm2 startup linux -u pi --hp /home/pi"
+sudo pm2 startup
+sudo su -c "env PATH=$PATH:/usr/bin pm2 startup -u pi --hp /home/pi"
 pm2 save
 ```
 
