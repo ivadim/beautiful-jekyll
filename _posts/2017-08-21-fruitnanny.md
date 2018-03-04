@@ -348,6 +348,15 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 pm2 save
 ```
 
+Modify `fruitnanny_config.js` to configure the baby monitor.
+
+Params:
+* `baby_name` - baby's name to display in UI
+* `baby_birthday` - baby's birthday
+* `temp_unit` - temperature to display in Celsius (`C`) or Fahrenheit(`F`)
+
+Update baby's picture you need to replace file `public/project/img/baby.png`.
+
 And time to start Fruitnanny:
 
 ```
