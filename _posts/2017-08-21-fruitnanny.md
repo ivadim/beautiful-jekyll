@@ -355,7 +355,7 @@ Params:
 * `baby_birthday` - baby's birthday
 * `temp_unit` - temperature to display in Celsius (`C`) or Fahrenheit(`F`)
 
-Update baby's picture you need to replace file `public/project/img/baby.png`.
+To update baby's picture you need to replace file `public/project/img/baby.png`.
 
 And time to start Fruitnanny:
 
