@@ -362,7 +362,8 @@ And time to start Fruitnanny:
 ```
 cd /opt/fruitnanny
 npm install
-pm2 start server/app.js --name="fruitnanny"
+sudo pm2 start server/app.js --name="fruitnanny"
+pm2 save
 ```
 
 ### Nginx
