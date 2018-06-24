@@ -263,7 +263,7 @@ git checkout v0.2.5
 sh autogen.sh
 ./configure --disable-websockets --disable-data-channels --disable-rabbitmq --disable-mqtt
 make
-make install
+sudo make install
 ```
 
 Fruitannany's specific Janus configuration files are located in folder `/opt/fruitnanny/configuration/janus/`:
