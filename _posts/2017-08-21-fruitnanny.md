@@ -216,7 +216,7 @@ Official repository doesn't contain a gstreamer plugin for rpi camera module, it
 ```
 git clone https://github.com/thaytan/gst-rpicamsrc /tmp/gst-rpicamsrc
 cd /tmp/gst-rpicamsrc
-/autogen.sh --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/
+./autogen.sh --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/
 make
 sudo make install
 ```
@@ -234,7 +234,7 @@ Gstreamer asks rpicamsrc for annotated with datetime watermark frames in 960x540
 **Audio pipeline**:
 
 ```
-gst-launch-1.0 -v alsasrc device=device=hw:1 ! audioconvert ! audioresample ! opusenc ! rtpopuspay ! queue max-size-bytes=0 max-size-buffers=0 ! udpsink host=127.0.0.1 port=5002
+gst-launch-1.0 -v alsasrc device=hw:1 ! audioconvert ! audioresample ! opusenc ! rtpopuspay ! queue max-size-bytes=0 max-size-buffers=0 ! udpsink host=127.0.0.1 port=5002
 ```
 
 Gstreamer asks alsa driver for the audio stream, parses it, resamples, encodes it with opus codec and sens it to udp port 5002.
