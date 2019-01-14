@@ -319,9 +319,10 @@ The same script is run by the NodeJS Web app.
 Now we are one step closer to the final step. Main applications were installed and configured and it's time to start them.
 
 ```
-cp /opt/fruitnanny/configuration/systemd/audio.service /etc/systemd/system/
-cp /opt/fruitnanny/configuration/systemd/video.service /etc/systemd/system/
-cp /opt/fruitnanny/configuration/systemd/janus.service /etc/systemd/system/
+sudo cp /opt/fruitnanny/configuration/systemd/audio.service /etc/systemd/system/
+sudo cp /opt/fruitnanny/configuration/systemd/video.service /etc/systemd/system/
+sudo cp /opt/fruitnanny/configuration/systemd/janus.service /etc/systemd/system/
+sudo cp /opt/fruitnanny/configuration/systemd/fruitnanny.service /etc/systemd/system/
 ```
 
 And time to start everything:
@@ -335,18 +336,12 @@ sudo systemctl start video
 
 sudo systemctl enable janus
 sudo systemctl start janus
+
+sudo systemctl enable fruitnanny
+sudo systemctl start fruitnanny
 ```
 
 At this point you should have everything up and running. To disable some services run `sudo systemctl stop SERVICE_NAME`.
-
-Install nodejs process manager (PM2) for automatic nodejs app startup:
-
-```
-sudo npm install pm2 -g
-pm2 startup
-sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
-pm2 save
-```
 
 Modify `fruitnanny_config.js` to configure the baby monitor.
 
@@ -356,15 +351,6 @@ Params:
 * `temp_unit` - temperature to display in Celsius (`C`) or Fahrenheit(`F`)
 
 To update baby's picture you need to replace file `public/project/img/baby.png`.
-
-And time to start Fruitnanny:
-
-```
-cd /opt/fruitnanny
-npm install
-sudo pm2 start server/app.js --name="fruitnanny"
-pm2 save
-```
 
 ### Nginx
 
@@ -401,6 +387,31 @@ Now accessing `http://RASPBERRY_IP/` you will be asked to enter credentials and 
 
 ![web-view](https://zurpeq-db3pap001.files.1drv.com/y4m3uJezg8tlnhuRJQyn32FOSpV42mNwXb6mKKL6i32TAgZZNr0gWCqyFY6CZ15j4wZB4oCc4NTGK1SsG0jAu_I-NT95_KpIGLz-WSQXBoTcvV98XZNOPcdZ7pyn4fBChtEHoATI2kderr4OpXUhpvdqxRTqkJMb9mUM71Rdsf7a7JNHHBCYiwtryaXepuO90L7Pcg7UEln1sm0HgAKaKDmBQ?width=660&height=304&cropmode=none)
 
+## Possible Fix for Safary
+Looks like libnice which is part of Raspberry PI disto is pretty outdated and doesn't work with Safari browser (iOS/MacOS).
+To fix the problem the new version of this library need to be compiled from sources.
+
+First, remove old version of libnice
+```
+sudo apt-get purge -y libnice-dev
+```
+
+Install build tools:
+```
+sudo apt-get install gcc autoconf automake libtool pkg-config gtk-doc-tools gettext python3 gengetopt
+```
+
+Build libnice from sources:
+```
+git clone https://gitlab.freedesktop.org/libnice/libnice /tmp/libnice 
+cd /tmp/libnice
+git checkout 0.1.15
+sed -i -e 's/NICE_ADD_FLAG(\[-Wcast-align\])/# NICE_ADD_FLAG(\[-Wcast-align\])/g' ./configure.ac
+sed -i -e 's/NICE_ADD_FLAG(\[-Wno-cast-function-type\])/# NICE_ADD_FLAG(\[-Wno-cast-function-type\])/g' ./configure.ac
+./autogen.sh --prefix=/usr --disable-gtk-doc
+make
+sudo make install
+```
 
 ## Case
 
